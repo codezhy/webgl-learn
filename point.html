@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>画图</title>
+    <script src="lib/util.js"></script>
+</head>
+<body>
+    <body onload="main()">
+        <canvas id="glcanvas" width="640" height="480">
+          Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+        </canvas>
+    </body>
+
+    <script>
+        const vs = `
+            attribute vec4 aVertexPosition;
+
+            void main() {
+                gl_Position  = aVertexPosition;
+                gl_PointSize = 10.0;
+            }
+        `
+
+        const fs = `
+            void main() {
+                gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+            }
+        `
+
+        function main() {
+            const gl   = getGL("#glcanvas");  
+            const prog = getProgram(gl, vs, fs);
+            gl.useProgram(prog);
+
+            var pos = getAttrib(gl, prog, 'aVertexPosition');
+            gl.vertexAttrib3f(pos, 1.0, 0.0, 0.0);
+
+            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            gl.drawArrays(gl.POINTS, 0, 1);
+        }
+
+        const canvas = document.querySelector("#glcanvas");
+        canvas.onmousedown = getXY;
+    </script>
+</body>
+</html>
