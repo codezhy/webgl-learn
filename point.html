@@ -36,16 +36,26 @@
             gl.useProgram(prog);
 
             var pos = getAttrib(gl, prog, 'aVertexPosition');
-            gl.vertexAttrib3f(pos, 1.0, 0.0, 0.0);
+
+            const canvas = document.querySelector("#glcanvas");
 
             gl.clearColor(0.0, 0.0, 0.0, 1.0);
             gl.clear(gl.COLOR_BUFFER_BIT);
 
-            gl.drawArrays(gl.POINTS, 0, 1);
+            var stack = [];
+            canvas.onmousedown = function(ev) {
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                stack.push(getXY(ev))
+                for(var i = 0; i < stack.length; i++) {
+                    var x = stack[i][0], y = stack[i][1];
+                    gl.vertexAttrib3f(pos, x, y, 0.0, 0.0);
+                    gl.drawArrays(gl.POINTS, 0, 1);
+                }
+            }
+
         }
 
-        const canvas = document.querySelector("#glcanvas");
-        canvas.onmousedown = getXY;
+
     </script>
 </body>
 </html>
