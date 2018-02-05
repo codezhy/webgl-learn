@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FrameBuffer Test</title>
+    <style>
+        #glcanvas {
+            width:200px;
+            height:200px;
+            margin:10px;
+            padding:0px;
+        }
+    </style>
+    <script src="/lib/jquery-3.3.1.min.js"></script>
+    <script src="/lib/util.js"></script>
+    <script src="/common/MV.js"></script>
+    <script src="/common/webgl-utils.js"></script>
+    <script src="fb/framebuffer.js"></script>
+
+</head>
+<body>
+    <body onload="main()">
+        <canvas id="glcanvas">
+          Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+        </canvas>
+    </body>
+
+    <script src="fb/main.js"></script>
+</body>
+</html>
